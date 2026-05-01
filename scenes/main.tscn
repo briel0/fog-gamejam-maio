@@ -9,6 +9,7 @@ size = Vector2(128, 128)
 [node name="Main" type="Node2D" unique_id=176912923]
 
 [node name="Character" parent="." unique_id=1913132122 instance=ExtResource("1_o5qli")]
+position = Vector2(98, 470)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=209594217]
 position = Vector2(575, 625)
@@ -19,3 +20,7 @@ texture = ExtResource("2_0wfyh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1133092974]
 shape = SubResource("RectangleShape2D_sugp2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=687306338]
+position = Vector2(405, 386)
+zoom = Vector2(2, 2)
