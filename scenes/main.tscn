@@ -3,24 +3,37 @@
 [ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://prefabs/character.tscn" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="2_0wfyh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sugp2"]
-size = Vector2(128, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
+size = Vector2(128, 124)
 
 [node name="Main" type="Node2D" unique_id=176912923]
 
 [node name="Character" parent="." unique_id=1913132122 instance=ExtResource("1_o5qli")]
-position = Vector2(98, 470)
-
-[node name="Floor" type="StaticBody2D" parent="." unique_id=209594217]
-position = Vector2(575, 625)
-scale = Vector2(9, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="Floor" unique_id=1423249206]
-texture = ExtResource("2_0wfyh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1133092974]
-shape = SubResource("RectangleShape2D_sugp2")
+position = Vector2(247, 172)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=687306338]
 position = Vector2(405, 386)
-zoom = Vector2(2, 2)
+
+[node name="Beam" type="StaticBody2D" parent="." unique_id=456732239]
+position = Vector2(1086, 442)
+scale = Vector2(9, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Beam" unique_id=416321108]
+position = Vector2(-5.3333335, -250)
+texture = ExtResource("2_0wfyh")
+
+[node name="UpSideCollision" type="CollisionShape2D" parent="Beam" unique_id=2092278496]
+position = Vector2(-5.2222214, -250)
+shape = SubResource("RectangleShape2D_0wfyh")
+
+[node name="Beam2" type="StaticBody2D" parent="." unique_id=256125171]
+position = Vector2(-144, 746)
+scale = Vector2(9, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Beam2" unique_id=818581608]
+position = Vector2(-5.3333335, -250)
+texture = ExtResource("2_0wfyh")
+
+[node name="UpSideCollision" type="CollisionShape2D" parent="Beam2" unique_id=1217344326]
+position = Vector2(-5.2222214, -248)
+shape = SubResource("RectangleShape2D_0wfyh")

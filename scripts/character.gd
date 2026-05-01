@@ -1,18 +1,37 @@
 extends CharacterBody2D
-
-const JUMP_VELOCITY = -800.0
+var hanging  = false
+var jumpable = true
+const JUMP_VELOCITY = -1200.0
 @export var speed: float = 400.0
 
 func _ready() -> void:
 	pass
-
+func disable_collision_temp():
+	set_collision_mask_value(1,false)
+	await get_tree().create_timer(0.3).timeout
+	set_collision_mask_value(1,true)
+	
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
+	#gravidade pq ta no ar
+	jumpable=true
+	if not is_on_floor() and not is_on_ceiling():
 		self.velocity += get_gravity() * delta
-	else:
-		if Input.is_action_just_pressed("jump"):
-			self.velocity.y = JUMP_VELOCITY
-
+		jumpable=false
+	#ta pendurado
+	
+	if is_on_ceiling():
+		if Input.is_action_just_pressed("up"):
+			position[1] -=250
+		if Input.is_action_just_pressed("down"):
+			self.velocity += get_gravity() * delta
+	elif  is_on_floor() and Input.is_action_just_pressed("down"):
+			position[1] +=250
+	
+	if jumpable and Input.is_action_just_pressed("jump"):
+		disable_collision_temp()
+		self.velocity.y = JUMP_VELOCITY
+	
+	
 	var direction := Input.get_axis("left", "right")
 	if direction:
 		self.velocity.x = direction * speed
