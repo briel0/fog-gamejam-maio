@@ -15,7 +15,7 @@ position = Vector2(247, 172)
 position = Vector2(405, 386)
 
 [node name="Beam" type="StaticBody2D" parent="." unique_id=456732239]
-position = Vector2(1086, 442)
+position = Vector2(1058, 395)
 scale = Vector2(9, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Beam" unique_id=416321108]
@@ -27,7 +27,7 @@ position = Vector2(-5.2222214, -250)
 shape = SubResource("RectangleShape2D_0wfyh")
 
 [node name="Beam2" type="StaticBody2D" parent="." unique_id=256125171]
-position = Vector2(-144, 746)
+position = Vector2(-139, 829)
 scale = Vector2(9, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Beam2" unique_id=818581608]
