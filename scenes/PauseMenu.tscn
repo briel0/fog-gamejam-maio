@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3v6k1xu4j0eo" path="res://scripts/pause_menu.gd" id="1_jvnd5"]
 
-[node name="PauseMenu" type="Control" unique_id=572549372]
+[node name="PauseMenu" type="Control" unique_id=572549372 node_paths=PackedStringArray("resumeButton", "mainMenuButton")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -11,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jvnd5")
+resumeButton = NodePath("Buttons/Resume")
+mainMenuButton = NodePath("Buttons/MainMenu")
 
 [node name="Overlay" type="ColorRect" parent="." unique_id=627095480]
 layout_mode = 1
@@ -33,12 +35,12 @@ grow_vertical = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="Button" type="Button" parent="Buttons" unique_id=2093261592]
+[node name="Resume" type="Button" parent="Buttons" unique_id=2093261592]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
 text = "RESUME"
 
-[node name="Button2" type="Button" parent="Buttons" unique_id=1664999109]
+[node name="MainMenu" type="Button" parent="Buttons" unique_id=1664999109]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
 text = "MAIN MENU"
