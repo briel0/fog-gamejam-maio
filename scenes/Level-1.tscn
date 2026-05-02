@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://db6f06y3yq8ly"]
+
+[ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://prefabs/character.tscn" id="1_2056l"]
+[ext_resource type="PackedScene" uid="uid://5ugtj8hkd1wr" path="res://prefabs/Beam.tscn" id="2_klgss"]
+[ext_resource type="PackedScene" uid="uid://cd3ebt865naao" path="res://prefabs/Bullet.tscn" id="2_tq7rs"]
+
+[node name="Level1" type="Node2D" unique_id=500923127]
+
+[node name="Character" parent="." unique_id=2032235730 instance=ExtResource("1_2056l")]
+position = Vector2(-213, 279)
+bullet_scene = ExtResource("2_tq7rs")
+
+[node name="Beams" type="Node" parent="." unique_id=1693334143]
+
+[node name="Beam" parent="Beams" unique_id=958304355 instance=ExtResource("2_klgss")]
+position = Vector2(-630, 691)
+
+[node name="Beam4" parent="Beams" unique_id=2025777332 instance=ExtResource("2_klgss")]
+position = Vector2(861, -17)
+
+[node name="Beam3" parent="Beams" unique_id=1456613368 instance=ExtResource("2_klgss")]
+position = Vector2(-638, 192)
+
+[node name="Beam2" parent="Beams" unique_id=699429462 instance=ExtResource("2_klgss")]
+position = Vector2(682, 443)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=29455691]
