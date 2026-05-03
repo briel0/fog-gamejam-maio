@@ -52,6 +52,12 @@ speed = 400.0
 position = Vector2(3.5, 0)
 shape = SubResource("RectangleShape2D_xofgc")
 
+[node name="Muzzle" type="Marker2D" parent="." unique_id=2055097722]
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=2025438279]
+wait_time = 0.5
+one_shot = true
+
 [node name="HatCooldown" type="Timer" parent="." unique_id=335118956]
 wait_time = 12.0
 
