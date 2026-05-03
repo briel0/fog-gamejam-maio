@@ -5,9 +5,12 @@ var jumpable
 var lastDirection: int = 1
 var direction: int = 1
 var shootable=true
+var attacking = false
 var hat : Node2D = null
 const JUMP_VELOCITY = -1200.0
 @export var speed: float = 1000.0
+@onready var melee_hitbox = $MeleeHitbox
+@onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
 
 func _ready() -> void:
 	pass
@@ -22,7 +25,7 @@ func throw_hat(delta):
 	hat.direction = direction
 	if direction==0:
 		hat.direction = lastDirection
-	hat.global_position=global_position + Vector2(hat.direction*20,-20)
+	hat.global_position=global_position + Vector2(hat.direction*130,-20)
 	get_tree().current_scene.add_child(hat)
 	get_node("HatCooldown").start()
 	 
@@ -31,14 +34,23 @@ func recover_hat():
 	shootable=true
 	if is_instance_valid(hat):
 		hat.queue_free()
+		
+func melee_attack():
+	pass
 func _physics_process(delta: float) -> void:
+	$AnimatedSprite2D.play("idle")
 	direction = 0
 	if Input.is_action_pressed("left"):
 		direction=-1
 		lastDirection=direction
+		melee_hitbox.position.x = -40
 	if Input.is_action_pressed("right"):
 		direction=1
 		lastDirection=direction
+		melee_hitbox.position.x = 40
+		
+	if Input.is_action_just_pressed("melee") and not attacking:
+		melee_attack()
 	if direction:
 		self.velocity.x = direction * speed
 	else:
