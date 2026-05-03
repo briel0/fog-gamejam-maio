@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://mcp04n88y75i"]
+
+[ext_resource type="Script" uid="uid://dqm0kr8djiyj4" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="2_oo0fn"]
+
+[node name="HUD" type="Control" unique_id=1278504509 node_paths=PackedStringArray("progressBar", "lifeBar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ahhtf")
+progressBar = NodePath("ProgressBar")
+lifeBar = NodePath("Lifes")
+lifeIcon = ExtResource("2_oo0fn")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1568801091]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.1
+offset_top = 20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+show_percentage = false
+
+[node name="Lifes" type="HBoxContainer" parent="." unique_id=1509411364]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_right = 1.0
+anchor_bottom = 0.1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Lifes" unique_id=485265497]
+layout_mode = 2
+size_flags_horizontal = 12
+size_flags_vertical = 12
+texture = ExtResource("2_oo0fn")
+
+[node name="TextureRect2" type="TextureRect" parent="Lifes" unique_id=293659840]
+layout_mode = 2
+size_flags_horizontal = 12
+size_flags_vertical = 12
+
+[node name="TextureRect3" type="TextureRect" parent="Lifes" unique_id=1116196251]
+layout_mode = 2
+size_flags_horizontal = 12
+size_flags_vertical = 12
