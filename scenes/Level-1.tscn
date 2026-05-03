@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://db6f06y3yq8ly"]
 
 [ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://prefabs/character.tscn" id="1_2056l"]
-[ext_resource type="PackedScene" uid="uid://5ugtj8hkd1wr" path="res://prefabs/Beam.tscn" id="2_klgss"]
+[ext_resource type="PackedScene" uid="uid://cr4fr0h5122m1" path="res://prefabs/beam.tscn" id="2_klgss"]
 [ext_resource type="PackedScene" uid="uid://cd3ebt865naao" path="res://prefabs/Bullet.tscn" id="2_tq7rs"]
 
 [node name="Level1" type="Node2D" unique_id=500923127]
