@@ -2,14 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_cs6s8"]
 [ext_resource type="Script" uid="uid://bn41enjjf6nc8" path="res://scripts/character.gd" id="1_xofgc"]
+[ext_resource type="PackedScene" uid="uid://l2h3sxi6xcoa" path="res://prefabs/hat.tscn" id="2_v5mhf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xofgc"]
 size = Vector2(128, 128)
 
 [node name="Character" type="CharacterBody2D" unique_id=2032235730]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 5
 script = ExtResource("1_xofgc")
+hat_scene = ExtResource("2_v5mhf")
+speed = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=416269749]
 texture_filter = 1

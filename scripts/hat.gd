@@ -1,25 +1,31 @@
 extends CharacterBody2D
 
+var gravidade = ProjectSettings.get_setting("physics/2d/default_gravity")
+var velocidade_arremesso: Vector2 = Vector2(850, -800) 
+var no_chao: bool = false
+var direction: int = 1
+var pode_ser_coletado
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+func _ready():
+	velocity = Vector2(velocidade_arremesso.x * direction, velocidade_arremesso.y)
+	await get_tree().create_timer(0.2).timeout
+	pode_ser_coletado = true
 
-
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()
+func _physics_process(delta):
+	if not no_chao:
+		velocity.y += gravidade * delta
+		var colisao = move_and_collide(velocity * delta)
+		if colisao:
+			var normal = colisao.get_normal()       
+			if normal.y < -0.5: 
+				no_chao = true
+				velocity = Vector2.ZERO 
+			elif abs(normal.x) > 0.5:
+				velocity.x = -velocity.x
+				velocity.x *= 0.8 
+func _on_area_coleta_body_entered(body):
+	print("achou")
+	if not pode_ser_coletado:
+		return
+	if body.has_method("recover_hat"):
+		body.recover_hat()

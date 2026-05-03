@@ -57,6 +57,12 @@ shoot={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="piso"
+2d_physics/layer_2="player"
+2d_physics/layer_3="hat"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

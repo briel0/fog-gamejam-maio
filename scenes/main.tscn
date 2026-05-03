@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://bglqim6dh5pq4"]
 
 [ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://prefabs/character.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://dbaij2s2exrij" path="res://prefabs/beam.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://5yxp70i2ena2" path="res://prefabs/beam.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Node2D" unique_id=176912923]
 
 [node name="Character" parent="." unique_id=1913132122 instance=ExtResource("1_o5qli")]
-position = Vector2(91, 89)
+position = Vector2(113, 361)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=687306338]
 position = Vector2(405, 386)
 
 [node name="Beam" parent="." unique_id=1385120846 instance=ExtResource("2_0wfyh")]
-position = Vector2(986, 300)
+position = Vector2(734, 200)
 
-[node name="Beam2" parent="." unique_id=1267115199 instance=ExtResource("2_0wfyh")]
-position = Vector2(-33, 684)
+[node name="Beam2" parent="." unique_id=1120741732 instance=ExtResource("2_0wfyh")]
+position = Vector2(-83, 612)

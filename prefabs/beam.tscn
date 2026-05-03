@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dbaij2s2exrij"]
+[gd_scene format=3 uid="uid://5yxp70i2ena2"]
 
 [ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_pmv8y"]
 
@@ -7,11 +7,11 @@ size = Vector2(128, 130)
 
 [node name="Beam" type="StaticBody2D" unique_id=1385120846]
 scale = Vector2(9, 1)
-collision_layer = 3
-collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1781685396]
+scale = Vector2(1, 0.5)
 texture = ExtResource("1_pmv8y")
 
 [node name="UpSideCollision" type="CollisionShape2D" parent="." unique_id=411214769]
+scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_0wfyh")
