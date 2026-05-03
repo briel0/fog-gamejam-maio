@@ -1,12 +1,10 @@
 [gd_scene format=3 uid="uid://bglqim6dh5pq4"]
 
 [ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://prefabs/character.tscn" id="1_o5qli"]
-[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://dbaij2s2exrij" path="res://prefabs/beam.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://cd3ebt865naao" path="res://prefabs/Bullet.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://5ugtj8hkd1wr" path="res://prefabs/Beam.tscn" id="3_jyhfs"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
-size = Vector2(128, 124)
+[ext_resource type="PackedScene" uid="uid://mcp04n88y75i" path="res://scenes/hud.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bo57o0stlv1rx" path="res://scenes/PauseMenu.tscn" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=176912923]
 
@@ -17,17 +15,14 @@ bullet_scene = ExtResource("2_sugp2")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=687306338]
 position = Vector2(405, 386)
 
-[node name="Beam" parent="." unique_id=958304355 instance=ExtResource("3_jyhfs")]
-position = Vector2(1086, 442)
+[node name="Beam" parent="." unique_id=1385120846 instance=ExtResource("2_0wfyh")]
+position = Vector2(986, 300)
 
-[node name="Beam2" type="StaticBody2D" parent="." unique_id=256125171]
-position = Vector2(-144, 746)
-scale = Vector2(9, 1)
+[node name="Beam2" parent="." unique_id=1267115199 instance=ExtResource("2_0wfyh")]
+position = Vector2(-33, 684)
 
-[node name="Sprite2D" type="Sprite2D" parent="Beam2" unique_id=818581608]
-position = Vector2(-5.3333335, -250)
-texture = ExtResource("2_0wfyh")
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=868829351]
 
-[node name="UpSideCollision" type="CollisionShape2D" parent="Beam2" unique_id=1217344326]
-position = Vector2(-5.2222214, -248)
-shape = SubResource("RectangleShape2D_0wfyh")
+[node name="HUD" parent="CanvasLayer" unique_id=1278504509 instance=ExtResource("3_sugp2")]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=572549372 instance=ExtResource("4_jyhfs")]
