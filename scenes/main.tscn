@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://prefabs/character.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://dbaij2s2exrij" path="res://prefabs/beam.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://mcp04n88y75i" path="res://scenes/hud.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bo57o0stlv1rx" path="res://scenes/PauseMenu.tscn" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=176912923]
 
@@ -16,3 +18,9 @@ position = Vector2(986, 300)
 
 [node name="Beam2" parent="." unique_id=1267115199 instance=ExtResource("2_0wfyh")]
 position = Vector2(-33, 684)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=868829351]
+
+[node name="HUD" parent="CanvasLayer" unique_id=1278504509 instance=ExtResource("3_sugp2")]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=572549372 instance=ExtResource("4_jyhfs")]
