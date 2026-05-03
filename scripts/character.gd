@@ -23,10 +23,10 @@ func handle_combat():
 func _ready() -> void:
 	pass
 	
-func disable_collision_temp():
-	set_collision_mask_value(1,false)
-	await get_tree().create_timer(0.3).timeout
-	set_collision_mask_value(1,true)
+func disable_collision_temp(mask, temp):
+	set_collision_mask_value(mask,false)
+	await get_tree().create_timer(temp).timeout
+	set_collision_mask_value(mask,true)
 	
 func _physics_process(delta: float) -> void:
 	if shootable and Input.is_action_pressed("shoot"):
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 			position.y += BEAM_OFFSET
 	
 	if jumpable and Input.is_action_just_pressed("jump"):
-		disable_collision_temp()
+		disable_collision_temp(1, 0.15)
 		self.velocity.y = JUMP_VELOCITY
 	
 	var direction := Input.get_axis("left", "right")
