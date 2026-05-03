@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b4j2uq3um22cm"]
+
+[ext_resource type="Script" uid="uid://cboe4xgm4whsb" path="res://scripts/hat.gd" id="1_4i8tn"]
+[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_wmafp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jyap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jflnv"]
+
+[node name="Hat" type="CharacterBody2D" unique_id=1564772125]
+script = ExtResource("1_4i8tn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=664727085]
+texture = ExtResource("1_wmafp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094869144]
+shape = SubResource("RectangleShape2D_1jyap")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=290048159]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1679887626]
+shape = SubResource("RectangleShape2D_jflnv")

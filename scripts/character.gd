@@ -1,6 +1,6 @@
 extends CharacterBody2D
 var hanging  = false
-var jumpable = true
+var shootable=true
 const JUMP_VELOCITY = -1200.0
 @export var speed: float = 400.0
 
@@ -13,7 +13,12 @@ func disable_collision_temp():
 	
 func _physics_process(delta: float) -> void:
 	#gravidade pq ta no ar
-	jumpable=true
+	if shootable and Input.is_action_pressed("shoot"):
+		shootable=false
+		get_node("HatCooldown").start()
+		print("atirei")
+	
+	var jumpable=true
 	if not is_on_floor() and not is_on_ceiling():
 		self.velocity += get_gravity() * delta
 		jumpable=false
@@ -39,3 +44,8 @@ func _physics_process(delta: float) -> void:
 		self.velocity.x = move_toward(self.velocity.x, 0, speed)
 
 	move_and_slide()
+
+
+func _on_hat_cooldown_timeout() -> void:
+	shootable=true
+	print("voltou o chapeu")
