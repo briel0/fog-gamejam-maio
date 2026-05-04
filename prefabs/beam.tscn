@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dl6ouoqk55opw"]
 
-[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_pmv8y"]
+[ext_resource type="Texture2D" uid="uid://dudsfnex5xiab" path="res://sprites/scenario/viga.png" id="1_pmv8y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0wfyh"]
-size = Vector2(128, 130)
+size = Vector2(185.83333, 29)
 
 [node name="Beam" type="StaticBody2D" unique_id=1385120846]
 scale = Vector2(9, 1)
@@ -11,7 +11,11 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1781685396]
+position = Vector2(-0.111111164, 0)
+scale = Vector2(0.04, 0.2)
 texture = ExtResource("1_pmv8y")
 
 [node name="UpSideCollision" type="CollisionShape2D" parent="." unique_id=411214769]
+position = Vector2(-0.27777693, 1)
+scale = Vector2(0.4, 2)
 shape = SubResource("RectangleShape2D_0wfyh")

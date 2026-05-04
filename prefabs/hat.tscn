@@ -1,24 +1,25 @@
 [gd_scene format=3 uid="uid://l2h3sxi6xcoa"]
 
 [ext_resource type="Script" uid="uid://dumxnwcmb7rbk" path="res://scripts/hat.gd" id="1_k1j1t"]
-[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_wmafp"]
+[ext_resource type="Texture2D" uid="uid://dsj7salqmdnkw" path="res://sprites/hat/hat.png" id="2_k1j1t"]
 [ext_resource type="Script" uid="uid://bqergixoaadqe" path="res://scripts/area_coleta.gd" id="3_k1j1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jyap"]
-size = Vector2(121, 123)
+size = Vector2(94, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jflnv"]
-size = Vector2(141, 143)
+size = Vector2(141, 82)
 
 [node name="Hat" type="CharacterBody2D" unique_id=1564772125]
 collision_layer = 4
 script = ExtResource("1_k1j1t")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=664727085]
-texture = ExtResource("1_wmafp")
+scale = Vector2(0.258, 0.258)
+texture = ExtResource("2_k1j1t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094869144]
-position = Vector2(-0.5, 0.5)
+position = Vector2(-2, -15)
 shape = SubResource("RectangleShape2D_1jyap")
 
 [node name="AreaColeta" type="Area2D" parent="." unique_id=290048159]
@@ -27,7 +28,7 @@ collision_mask = 2
 script = ExtResource("3_k1j1t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaColeta" unique_id=1679887626]
-position = Vector2(1.5, 0.5)
+position = Vector2(1.5, -30)
 shape = SubResource("RectangleShape2D_jflnv")
 
 [connection signal="body_entered" from="AreaColeta" to="." method="_on_area_coleta_body_entered"]

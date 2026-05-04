@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const JUMP_VELOCITY = -1200.0
-const BEAM_OFFSET = 250
+const BEAM_OFFSET = 150
 
 var hanging = false
 var shootable = true
@@ -10,16 +10,12 @@ var lastDirection: int = 1
 var direction: int = 1
 var attacking = false
 var hat: Node2D = null
-var last_facing: int = 1
 
 @export var hat_scene: PackedScene
 @export var speed: float = 1000.0
-@export var bullet_scene: PackedScene
 
 @onready var melee_hitbox = $MeleeHitbox
 @onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
-@onready var muzzle = $Muzzle
-@onready var shoot_timer: Timer = $ShootTimer
 
 func _ready() -> void:
 	pass
@@ -29,7 +25,7 @@ func disable_collision_temp(mask,temp):
 	await get_tree().create_timer(temp).timeout
 	set_collision_mask_value(mask,true)
 
-func throw_hat(delta):
+func throw_hat():
 	shootable=false
 	hat = hat_scene.instantiate()
 	hat.direction = direction
@@ -44,33 +40,28 @@ func recover_hat():
 	shootable=true
 	if is_instance_valid(hat):
 		hat.queue_free()
-		
+
+func update_animations():
+	$AnimatedSprite2D.flip_h = lastDirection < 0
+	if direction!=0:
+		$AnimatedSprite2D.play("walk")
+	else:
+		$AnimatedSprite2D.play("idle")
 func melee_attack():
 	pass
 
-func handle_combat():
-	if Input.is_action_just_pressed("shoot") and shoot_timer.is_stopped():
-		shoot_timer.start()
-		var b = bullet_scene.instantiate()
-		get_tree().root.add_child(b)
-		b.position = muzzle.global_position
-		b.direction = last_facing
-
 func _physics_process(delta: float) -> void:
-	$AnimatedSprite2D.play("idle")
 	direction = Input.get_axis("left", "right")
 	if direction < 0:
 		melee_hitbox.position.x = -40
+		lastDirection = direction
 	if direction > 0:
 		melee_hitbox.position.x = 40
-	lastDirection=direction
-		
+		lastDirection = direction
 	if Input.is_action_just_pressed("melee") and not attacking:
 		melee_attack()
 
 	if direction:
-		last_facing = sign(direction)
-		muzzle.position.x = abs(muzzle.position.x) * last_facing
 		self.velocity.x = direction * speed
 	else:
 		self.velocity.x = move_toward(self.velocity.x, 0, speed)
@@ -78,7 +69,7 @@ func _physics_process(delta: float) -> void:
 	if shootable and Input.is_action_pressed("shoot"):
 		shootable=false
 		get_node("HatCooldown").start()
-		throw_hat(delta)
+		throw_hat()
 	
 	jumpable=true
 	if not is_on_floor() and not is_on_ceiling():
@@ -98,8 +89,6 @@ func _physics_process(delta: float) -> void:
 		self.velocity.y = JUMP_VELOCITY
 
 	move_and_slide()
-	handle_combat()
-
-
+	update_animations()
 func _on_hat_cooldown_timeout() -> void:
 	recover_hat()
