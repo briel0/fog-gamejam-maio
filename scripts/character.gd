@@ -8,25 +8,30 @@ var shootable = true
 var jumpable = true
 var lastDirection: int = 1
 var direction: int = 1
-var attacking = false
+var attackable = true
 var hat: Node2D = null
 
+@export var health= 3
 @export var hat_scene: PackedScene
 @export var speed: float = 1000.0
 
 @onready var melee_hitbox = $MeleeHitbox
 @onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
-
+@onready var hitbox_sprite = $MeleeHitbox/Sprite2D #da para tirar dps
 func _ready() -> void:
-	pass
+	hitbox_sprite.hide()
 
 func disable_collision_temp(mask,temp):
 	set_collision_mask_value(mask,false)
 	await get_tree().create_timer(temp).timeout
 	set_collision_mask_value(mask,true)
 
+func take_damage(amount):
+	self.health-=amount
+
 func throw_hat():
 	shootable=false
+	attackable=false
 	hat = hat_scene.instantiate()
 	hat.direction = direction
 	if direction==0:
@@ -34,6 +39,7 @@ func throw_hat():
 	hat.global_position=global_position + Vector2(hat.direction*130,-20)
 	get_tree().current_scene.add_child(hat)
 	get_node("HatCooldown").start()
+	attackable=true
 	 
 func recover_hat():
 	get_node("HatCooldown").stop()
@@ -48,17 +54,25 @@ func update_animations():
 	else:
 		$AnimatedSprite2D.play("idle")
 func melee_attack():
-	pass
+	attackable=false
+	hitbox_shape.disabled = false
+	hitbox_sprite.show()
+	await get_tree().create_timer(0.2).timeout
+	update_animations()
+	hitbox_sprite.hide()
+	hitbox_shape.disabled = true
+	attackable=true
 
 func _physics_process(delta: float) -> void:
 	direction = Input.get_axis("left", "right")
 	if direction < 0:
-		melee_hitbox.position.x = -40
+		melee_hitbox.position.x = -80
 		lastDirection = direction
 	if direction > 0:
-		melee_hitbox.position.x = 40
+		melee_hitbox.position.x = 0
 		lastDirection = direction
-	if Input.is_action_just_pressed("melee") and not attacking:
+	
+	if Input.is_action_just_pressed("melee") and attackable:
 		melee_attack()
 
 	if direction:
@@ -67,8 +81,6 @@ func _physics_process(delta: float) -> void:
 		self.velocity.x = move_toward(self.velocity.x, 0, speed)
 	#gravidade pq ta no ar
 	if shootable and Input.is_action_pressed("shoot"):
-		shootable=false
-		get_node("HatCooldown").start()
 		throw_hat()
 	
 	jumpable=true
@@ -92,3 +104,8 @@ func _physics_process(delta: float) -> void:
 	update_animations()
 func _on_hat_cooldown_timeout() -> void:
 	recover_hat()
+
+
+func _on_melee_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method("take_damage"):
+		body.take_damage(1)

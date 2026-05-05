@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cbpgbds1l5vgl" path="res://sprites/character/walk1.png" id="5_g600d"]
 [ext_resource type="Texture2D" uid="uid://dqugh63sfquqh" path="res://sprites/character/walk3.png" id="6_owod2"]
 [ext_resource type="Texture2D" uid="uid://c0yh77cw828rd" path="res://sprites/character/walk2.png" id="7_bfnxi"]
+[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="8_yqljb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xofgc"]
 size = Vector2(85, 128)
@@ -40,6 +41,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ca2f"]
+size = Vector2(20, 37)
 
 [node name="Character" type="CharacterBody2D" unique_id=2032235730]
 collision_layer = 2
@@ -68,6 +70,14 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeHitbox" unique_id=1141871769]
+position = Vector2(51, 0)
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_6ca2f")
 
+[node name="Sprite2D" type="Sprite2D" parent="MeleeHitbox" unique_id=1545122235]
+position = Vector2(49.999992, 2.861023e-06)
+scale = Vector2(0.46875, 0.875)
+texture = ExtResource("8_yqljb")
+
 [connection signal="timeout" from="HatCooldown" to="." method="_on_hat_cooldown_timeout"]
+[connection signal="body_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_body_entered"]
