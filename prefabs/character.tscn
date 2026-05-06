@@ -59,6 +59,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_bfnxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_owod2")
 }],
 "loop": true,
 "name": &"walk",
@@ -100,6 +103,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("16_cvkvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ljx3n")
 }],
 "loop": true,
 "name": &"wh_walk",
@@ -127,7 +133,7 @@ wait_time = 12.0
 position = Vector2(9.000001, 2)
 scale = Vector2(0.268, 0.268)
 sprite_frames = SubResource("SpriteFrames_adroo")
-animation = &"wh_hang"
+animation = &"wh_walk"
 
 [node name="MeleeHitbox" type="Area2D" parent="." unique_id=1465840269]
 disable_mode = 2
