@@ -13,6 +13,7 @@ func _ready():
 
 func _physics_process(delta):
 	if not no_chao:
+		rotation += delta*PI*5
 		velocity.y += gravidade * delta
 		var colisao = move_and_collide(velocity * delta)
 		if colisao:

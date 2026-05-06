@@ -10,6 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://dqugh63sfquqh" path="res://sprites/character/walk3.png" id="6_owod2"]
 [ext_resource type="Texture2D" uid="uid://c0yh77cw828rd" path="res://sprites/character/walk2.png" id="7_bfnxi"]
 [ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="8_yqljb"]
+[ext_resource type="Texture2D" uid="uid://djvyrtdl6nr6a" path="res://sprites/character/wh_hang1.png" id="10_owmuv"]
+[ext_resource type="Texture2D" uid="uid://dbld82n0dh3nm" path="res://sprites/character/wh_idle1.png" id="11_tra6b"]
+[ext_resource type="Texture2D" uid="uid://cly83omlathl0" path="res://sprites/character/wh_idle2.png" id="12_5q0oj"]
+[ext_resource type="Texture2D" uid="uid://cr6t1pyi5owli" path="res://sprites/character/wh_jump1.png" id="13_mp6e7"]
+[ext_resource type="Texture2D" uid="uid://1o1bhe4383fq" path="res://sprites/character/wh_walk1.png" id="14_awmub"]
+[ext_resource type="Texture2D" uid="uid://c7wvy3a5hxmxa" path="res://sprites/character/wh_walk3.png" id="15_ljx3n"]
+[ext_resource type="Texture2D" uid="uid://bsi2sbgiel7dq" path="res://sprites/character/wh_walk2.png" id="16_cvkvc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xofgc"]
 size = Vector2(85, 128)
@@ -56,6 +63,47 @@ animations = [{
 "loop": true,
 "name": &"walk",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_owmuv")
+}],
+"loop": true,
+"name": &"wh_hang",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_tra6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5q0oj")
+}],
+"loop": true,
+"name": &"wh_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_mp6e7")
+}],
+"loop": true,
+"name": &"wh_jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_awmub")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ljx3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_cvkvc")
+}],
+"loop": true,
+"name": &"wh_walk",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ca2f"]
@@ -79,7 +127,7 @@ wait_time = 12.0
 position = Vector2(9.000001, 2)
 scale = Vector2(0.268, 0.268)
 sprite_frames = SubResource("SpriteFrames_adroo")
-animation = &"hang"
+animation = &"wh_hang"
 
 [node name="MeleeHitbox" type="Area2D" parent="." unique_id=1465840269]
 disable_mode = 2

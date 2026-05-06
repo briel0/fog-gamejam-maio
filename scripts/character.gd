@@ -58,18 +58,36 @@ func update_animations():
 		animationSprite.scale = 0.28* normal_scale
 		animationSprite.position.y = -20
 		animationSprite.flip_h = not animationSprite.flip_h
-		animationSprite.play("hang")
+		if shootable:
+			animationSprite.play("hang")
+		else:
+			animationSprite.play("wh_hang")
 		return
+		
 	if not is_on_floor():
 		animationSprite.scale = 0.28* normal_scale
-		animationSprite.play("jump")
+		if shootable:
+			animationSprite.play("jump")
+		else:
+			animationSprite.play("wh_jump")
 		return
-	if direction!=0:
-		animationSprite.play("walk")
-	else:
-		animationSprite.play("idle")
+	
 	animationSprite.position = Vector2(0,5)
-	animationSprite.scale = normal_scale
+	
+	if shootable:
+		animationSprite.scale = normal_scale
+		if direction!=0:
+			animationSprite.play("walk")
+		else:
+			animationSprite.play("idle")
+	else:
+		animationSprite.scale = 0.28* normal_scale
+		if direction!=0:
+			animationSprite.play("wh_walk")
+		else:
+			animationSprite.play("wh_idle")
+	
+	
 func melee_attack():
 	attackable=false
 	hitbox_shape.disabled = false

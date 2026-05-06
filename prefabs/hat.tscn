@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bqergixoaadqe" path="res://scripts/area_coleta.gd" id="3_k1j1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jyap"]
-size = Vector2(94, 52)
+size = Vector2(87, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jflnv"]
 size = Vector2(141, 82)
@@ -19,7 +19,7 @@ scale = Vector2(0.258, 0.258)
 texture = ExtResource("2_k1j1t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2094869144]
-position = Vector2(-2, -15)
+position = Vector2(-5.5, -16.5)
 shape = SubResource("RectangleShape2D_1jyap")
 
 [node name="AreaColeta" type="Area2D" parent="." unique_id=290048159]
