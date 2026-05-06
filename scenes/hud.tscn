@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://mcp04n88y75i"]
 
 [ext_resource type="Script" uid="uid://dqm0kr8djiyj4" path="res://scripts/hud.gd" id="1_ahhtf"]
-[ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="2_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://ct3dblemmvpmw" path="res://sprites/lifebar/health3.png" id="2_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://dntph2qe8ur5w" path="res://sprites/lifebar/health2.png" id="3_047uy"]
+[ext_resource type="Texture2D" uid="uid://dcoucxrrtc6pj" path="res://sprites/lifebar/health1.png" id="4_5pdws"]
+[ext_resource type="Texture2D" uid="uid://5uyjfawbvh37" path="res://sprites/lifebar/dead.png" id="5_hd3ao"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0i1j5"]
+load_path = "res://.godot/imported/health3.png-dd585fdbf3dfc9fe97e7644f189691fa.ctex"
 
 [node name="HUD" type="Control" unique_id=1278504509 node_paths=PackedStringArray("progressBar", "lifeBar")]
 layout_mode = 3
@@ -12,8 +18,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ahhtf")
 progressBar = NodePath("ProgressBar")
-lifeBar = NodePath("Lifes")
-lifeIcon = ExtResource("2_oo0fn")
+lifeBar = NodePath("")
+health3Icon = ExtResource("2_uo2fv")
+health2Icon = ExtResource("3_047uy")
+health1Icon = ExtResource("4_5pdws")
+deadIcon = ExtResource("5_hd3ao")
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1568801091]
 layout_mode = 1
@@ -27,31 +36,12 @@ grow_horizontal = 2
 grow_vertical = 2
 show_percentage = false
 
-[node name="Lifes" type="HBoxContainer" parent="." unique_id=1509411364]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.8
-anchor_right = 1.0
-anchor_bottom = 0.1
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = -20.0
-grow_horizontal = 0
-alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="Lifes" unique_id=485265497]
-layout_mode = 2
+[node name="HealthIcon" type="TextureRect" parent="." unique_id=485265497]
+layout_mode = 0
+offset_left = 1135.0
+offset_top = 1.0
+offset_right = 1263.0
+offset_bottom = 129.0
 size_flags_horizontal = 12
 size_flags_vertical = 12
-texture = ExtResource("2_oo0fn")
-
-[node name="TextureRect2" type="TextureRect" parent="Lifes" unique_id=293659840]
-layout_mode = 2
-size_flags_horizontal = 12
-size_flags_vertical = 12
-
-[node name="TextureRect3" type="TextureRect" parent="Lifes" unique_id=1116196251]
-layout_mode = 2
-size_flags_horizontal = 12
-size_flags_vertical = 12
+texture = SubResource("CompressedTexture2D_0i1j5")

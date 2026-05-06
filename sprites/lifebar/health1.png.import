@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dudsfnex5xiab"
-path="res://.godot/imported/viga.png-29200f174ec85ff03026681e6d5cae74.ctex"
+uid="uid://dcoucxrrtc6pj"
+path="res://.godot/imported/health1.png-4975cd8fe64c0f1d2384a4149b581cb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/scenario/viga.png"
-dest_files=["res://.godot/imported/viga.png-29200f174ec85ff03026681e6d5cae74.ctex"]
+source_file="res://sprites/lifebar/health1.png"
+dest_files=["res://.godot/imported/health1.png-4975cd8fe64c0f1d2384a4149b581cb6.ctex"]
 
 [params]
 

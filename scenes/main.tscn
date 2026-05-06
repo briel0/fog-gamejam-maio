@@ -22,10 +22,8 @@ position = Vector2(-33, 684)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=868829351]
 
 [node name="HUD" parent="CanvasLayer" unique_id=1278504509 instance=ExtResource("3_sugp2")]
-offset_left = -2.0
-offset_top = 2.0
-offset_right = -2.0
-offset_bottom = 2.0
+offset_top = -1.0
+offset_bottom = -1.0
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=572549372 instance=ExtResource("4_jyhfs")]
 visible = false
@@ -33,3 +31,5 @@ offset_left = -94.0
 offset_top = -10.0
 offset_right = -94.0
 offset_bottom = -10.0
+
+[connection signal="healthChanged" from="Character" to="CanvasLayer/HUD" method="_on_character_health_changed"]

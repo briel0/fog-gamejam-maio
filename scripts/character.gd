@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal healthChanged(currentHealth : int)
+
 const JUMP_VELOCITY = -1200.0
 const BEAM_OFFSET = 150
 
@@ -15,6 +17,8 @@ var hat: Node2D = null
 @export var hat_scene: PackedScene
 @export var speed: float = 1000.0
 
+@onready var animationSprite = $AnimatedSprite2D
+@onready var normal_scale = $AnimatedSprite2D.scale
 @onready var melee_hitbox = $MeleeHitbox
 @onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
 @onready var hitbox_sprite = $MeleeHitbox/Sprite2D #da para tirar dps
@@ -26,8 +30,9 @@ func disable_collision_temp(mask,temp):
 	await get_tree().create_timer(temp).timeout
 	set_collision_mask_value(mask,true)
 
-func take_damage(amount):
+func take_damage(amount : int):
 	self.health-=amount
+	healthChanged.emit(health)
 
 func throw_hat():
 	shootable=false
@@ -48,11 +53,23 @@ func recover_hat():
 		hat.queue_free()
 
 func update_animations():
-	$AnimatedSprite2D.flip_h = lastDirection < 0
+	animationSprite.flip_h = lastDirection < 0
+	if is_on_ceiling():
+		animationSprite.scale = 0.28* normal_scale
+		animationSprite.position.y = -20
+		animationSprite.flip_h = not animationSprite.flip_h
+		animationSprite.play("hang")
+		return
+	if not is_on_floor():
+		animationSprite.scale = 0.28* normal_scale
+		animationSprite.play("jump")
+		return
 	if direction!=0:
-		$AnimatedSprite2D.play("walk")
+		animationSprite.play("walk")
 	else:
-		$AnimatedSprite2D.play("idle")
+		animationSprite.play("idle")
+	animationSprite.position = Vector2(0,5)
+	animationSprite.scale = normal_scale
 func melee_attack():
 	attackable=false
 	hitbox_shape.disabled = false
@@ -83,10 +100,11 @@ func _physics_process(delta: float) -> void:
 	if shootable and Input.is_action_pressed("shoot"):
 		throw_hat()
 	
-	jumpable=true
+	if is_on_floor():
+		jumpable=true
+	
 	if not is_on_floor() and not is_on_ceiling():
 		self.velocity += get_gravity() * delta
-		jumpable=false
 	
 	if is_on_ceiling():
 		if Input.is_action_just_pressed("up"):
@@ -99,9 +117,11 @@ func _physics_process(delta: float) -> void:
 	if jumpable and Input.is_action_just_pressed("jump"):
 		disable_collision_temp(1,0.15)
 		self.velocity.y = JUMP_VELOCITY
-
-	move_and_slide()
+		jumpable=false
+	
 	update_animations()
+	move_and_slide()
+	
 func _on_hat_cooldown_timeout() -> void:
 	recover_hat()
 
