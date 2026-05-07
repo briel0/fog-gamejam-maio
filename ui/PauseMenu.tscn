@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bo57o0stlv1rx"]
 
-[ext_resource type="Script" uid="uid://d3v6k1xu4j0eo" path="res://scripts/pause_menu.gd" id="1_jvnd5"]
+[ext_resource type="Script" uid="uid://d3v6k1xu4j0eo" path="res://ui/pause_menu.gd" id="1_jvnd5"]
 
 [node name="PauseMenu" type="Control" unique_id=572549372 node_paths=PackedStringArray("resumeButton", "mainMenuButton")]
 process_mode = 3

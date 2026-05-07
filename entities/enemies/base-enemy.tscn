@@ -1,16 +1,19 @@
 [gd_scene format=3 uid="uid://co7c0jw0h3wxy"]
 
 [ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_30y60"]
-[ext_resource type="Script" uid="uid://brrjj5mrhngcq" path="res://scripts/base_enemy.gd" id="1_f042n"]
-[ext_resource type="PackedScene" uid="uid://c1jfm31fcr4gh" path="res://prefabs/components/healthComponent.tscn" id="2_nin2j"]
-[ext_resource type="Script" uid="uid://dysts0kpwv61d" path="res://prefabs/state_machine.gd" id="3_2bcha"]
-[ext_resource type="Script" uid="uid://diw4f0gd3xtrs" path="res://prefabs/patrol_state.gd" id="4_qromu"]
+[ext_resource type="Script" uid="uid://brrjj5mrhngcq" path="res://entities/enemies/base_enemy.gd" id="1_f042n"]
+[ext_resource type="PackedScene" uid="uid://c1jfm31fcr4gh" path="res://components/healthComponent.tscn" id="2_nin2j"]
+[ext_resource type="Script" uid="uid://dysts0kpwv61d" path="res://states/state_machine.gd" id="3_2bcha"]
+[ext_resource type="Script" uid="uid://diw4f0gd3xtrs" path="res://states/patrol_state.gd" id="4_qromu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qromu"]
 size = Vector2(130, 126)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vjpeq"]
+size = Vector2(138, 129)
+
 [node name="BaseEnemy" type="CharacterBody2D" unique_id=823407385]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 9
 script = ExtResource("1_f042n")
 
@@ -21,6 +24,7 @@ shape = SubResource("RectangleShape2D_qromu")
 texture = ExtResource("1_30y60")
 
 [node name="HealthComponent" parent="." unique_id=1385140768 instance=ExtResource("2_nin2j")]
+max_health = 2
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1973689865]
 position = Vector2(91, -3)
@@ -32,3 +36,13 @@ initial_state = NodePath("PatrolState")
 
 [node name="PatrolState" type="Node" parent="StateMachine" unique_id=1799516039]
 script = ExtResource("4_qromu")
+
+[node name="DamageZone" type="Area2D" parent="." unique_id=1519638628]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone" unique_id=745604273]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_vjpeq")
+
+[connection signal="body_entered" from="DamageZone" to="." method="_on_damage_zone_body_entered"]

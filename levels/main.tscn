@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://bglqim6dh5pq4"]
+
+[ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://entities/player/character.tscn" id="1_ifaiv"]
+[ext_resource type="PackedScene" uid="uid://mcp04n88y75i" path="res://ui/hud.tscn" id="2_5k4jt"]
+[ext_resource type="PackedScene" uid="uid://bo57o0stlv1rx" path="res://ui/PauseMenu.tscn" id="3_qy63d"]
+[ext_resource type="PackedScene" uid="uid://dl6ouoqk55opw" path="res://projectiles/beam.tscn" id="4_6et1j"]
+[ext_resource type="PackedScene" uid="uid://co7c0jw0h3wxy" path="res://entities/enemies/base-enemy.tscn" id="5_etqu2"]
+
+[node name="Main" type="Node2D" unique_id=176912923]
+
+[node name="Character" parent="." unique_id=1913132122 instance=ExtResource("1_ifaiv")]
+position = Vector2(-710, -365)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=687306338]
+zoom = Vector2(0.8, 0.8)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=868829351]
+
+[node name="HUD" parent="CanvasLayer" unique_id=1278504509 instance=ExtResource("2_5k4jt")]
+offset_left = -920.0
+offset_top = -510.0
+offset_right = -920.0
+offset_bottom = -510.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=572549372 instance=ExtResource("3_qy63d")]
+visible = false
+offset_left = -94.0
+offset_top = -10.0
+offset_right = -94.0
+offset_bottom = -10.0
+
+[node name="Beams" type="Node" parent="." unique_id=366953583]
+
+[node name="Beam" parent="Beams" unique_id=1385120846 instance=ExtResource("4_6et1j")]
+position = Vector2(-287, -129)
+
+[node name="Beam2" parent="Beams" unique_id=1267115199 instance=ExtResource("4_6et1j")]
+position = Vector2(-990, 147)
+
+[node name="Beam3" parent="Beams" unique_id=1986143266 instance=ExtResource("4_6et1j")]
+position = Vector2(-301, 375)
+
+[node name="Beam4" parent="Beams" unique_id=1565238057 instance=ExtResource("4_6et1j")]
+position = Vector2(579, -268)
+
+[node name="Beam5" parent="Beams" unique_id=653636415 instance=ExtResource("4_6et1j")]
+position = Vector2(481, 211)
+
+[node name="BaseEnemy" parent="." unique_id=823407385 instance=ExtResource("5_etqu2")]
+position = Vector2(-231, 291)
+
+[node name="BaseEnemy2" parent="." unique_id=1134258283 instance=ExtResource("5_etqu2")]
+position = Vector2(288, 117)
+
+[node name="BaseEnemy3" parent="." unique_id=1204235723 instance=ExtResource("5_etqu2")]
+position = Vector2(379, -359)
+
+[node name="BaseEnemy4" parent="." unique_id=282832706 instance=ExtResource("5_etqu2")]
+position = Vector2(-97, -222)
+
+[connection signal="healthChanged" from="Character" to="CanvasLayer/HUD" method="_on_character_health_changed"]

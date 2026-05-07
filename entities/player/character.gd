@@ -13,7 +13,6 @@ var direction: int = 1
 var attackable = true
 var hat: Node2D = null
 
-@export var health= 3
 @export var hat_scene: PackedScene
 @export var speed: float = 1000.0
 
@@ -22,17 +21,30 @@ var hat: Node2D = null
 @onready var melee_hitbox = $MeleeHitbox
 @onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
 @onready var hitbox_sprite = $MeleeHitbox/Sprite2D #da para tirar dps
+@onready var health_component = $HealthComponent
+
 func _ready() -> void:
     hitbox_sprite.hide()
+    hitbox_shape.set_deferred("disabled", true)
+    
+    health_component.died.connect(refresh_game)
+
+func refresh_game() -> void:
+    get_tree().call_deferred("reload_current_scene")
 
 func disable_collision_temp(mask,temp):
     set_collision_mask_value(mask,false)
     await get_tree().create_timer(temp).timeout
     set_collision_mask_value(mask,true)
 
-func take_damage(amount : int):
-    self.health-=amount
-    healthChanged.emit(health)
+func take_damage(amount: int) -> void:
+    health_component.take_damage(amount)
+    piscar_dano()
+
+func piscar_dano() -> void:
+    animationSprite.modulate = Color(1, 0, 0) 
+    await get_tree().create_timer(0.2).timeout 
+    animationSprite.modulate = Color(1, 1, 1)
 
 func throw_hat():
     shootable=false
@@ -41,7 +53,7 @@ func throw_hat():
     hat.direction = direction
     if direction==0:
         hat.direction = lastDirection
-    hat.global_position=global_position + Vector2(hat.direction*130,-20)
+    hat.global_position=global_position + Vector2(hat.direction * 130,-20)
     get_tree().current_scene.add_child(hat)
     get_node("HatCooldown").start()
     attackable=true
@@ -87,16 +99,17 @@ func update_animations():
         else:
             animationSprite.play("wh_idle")
     
-    
 func melee_attack():
-    attackable=false
-    hitbox_shape.disabled = false
+    attackable = false
+    hitbox_shape.set_deferred("disabled", false) # Liga o dano
     hitbox_sprite.show()
+    
     await get_tree().create_timer(0.2).timeout
+    
     update_animations()
     hitbox_sprite.hide()
-    hitbox_shape.disabled = true
-    attackable=true
+    hitbox_shape.set_deferred("disabled", true) # Desliga o dano
+    attackable = true
 
 func _physics_process(delta: float) -> void:
     direction = Input.get_axis("left", "right")
@@ -136,7 +149,7 @@ func _physics_process(delta: float) -> void:
         disable_collision_temp(1,0.15)
         self.velocity.y = JUMP_VELOCITY
         jumpable=false
-    
+        
     update_animations()
     move_and_slide()
     
@@ -144,6 +157,6 @@ func _on_hat_cooldown_timeout() -> void:
     recover_hat()
 
 func _on_melee_hitbox_body_entered(body: Node2D) -> void:
-    print("BATEU")
+    print("BATEU NO INIMIGO")
     if body.has_method("take_damage"):
         body.take_damage(1)

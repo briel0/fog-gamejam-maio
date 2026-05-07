@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://l2h3sxi6xcoa"]
 
-[ext_resource type="Script" uid="uid://dumxnwcmb7rbk" path="res://scripts/hat.gd" id="1_k1j1t"]
+[ext_resource type="Script" uid="uid://dumxnwcmb7rbk" path="res://projectiles/hat.gd" id="1_k1j1t"]
 [ext_resource type="Texture2D" uid="uid://dsj7salqmdnkw" path="res://sprites/hat/hat.png" id="2_k1j1t"]
-[ext_resource type="Script" uid="uid://bqergixoaadqe" path="res://scripts/area_coleta.gd" id="3_k1j1t"]
+[ext_resource type="Script" uid="uid://bqergixoaadqe" path="res://projectiles/area_coleta.gd" id="3_k1j1t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1jyap"]
 size = Vector2(87, 47)
@@ -11,7 +11,7 @@ size = Vector2(87, 47)
 size = Vector2(141, 82)
 
 [node name="Hat" type="CharacterBody2D" unique_id=1564772125]
-collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_k1j1t")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=664727085]

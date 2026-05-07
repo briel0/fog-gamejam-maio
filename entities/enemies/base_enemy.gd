@@ -15,3 +15,7 @@ func take_damage(amount: int) -> void:
 
 func _on_died() -> void:
     queue_free()
+    
+func _on_damage_zone_body_entered(body: Node2D) -> void:
+    if body.has_method("take_damage"):
+        body.take_damage(1)
