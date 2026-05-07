@@ -23,127 +23,127 @@ var hat: Node2D = null
 @onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
 @onready var hitbox_sprite = $MeleeHitbox/Sprite2D #da para tirar dps
 func _ready() -> void:
-	hitbox_sprite.hide()
+    hitbox_sprite.hide()
 
 func disable_collision_temp(mask,temp):
-	set_collision_mask_value(mask,false)
-	await get_tree().create_timer(temp).timeout
-	set_collision_mask_value(mask,true)
+    set_collision_mask_value(mask,false)
+    await get_tree().create_timer(temp).timeout
+    set_collision_mask_value(mask,true)
 
 func take_damage(amount : int):
-	self.health-=amount
-	healthChanged.emit(health)
+    self.health-=amount
+    healthChanged.emit(health)
 
 func throw_hat():
-	shootable=false
-	attackable=false
-	hat = hat_scene.instantiate()
-	hat.direction = direction
-	if direction==0:
-		hat.direction = lastDirection
-	hat.global_position=global_position + Vector2(hat.direction*130,-20)
-	get_tree().current_scene.add_child(hat)
-	get_node("HatCooldown").start()
-	attackable=true
-	 
+    shootable=false
+    attackable=false
+    hat = hat_scene.instantiate()
+    hat.direction = direction
+    if direction==0:
+        hat.direction = lastDirection
+    hat.global_position=global_position + Vector2(hat.direction*130,-20)
+    get_tree().current_scene.add_child(hat)
+    get_node("HatCooldown").start()
+    attackable=true
+     
 func recover_hat():
-	get_node("HatCooldown").stop()
-	shootable=true
-	if is_instance_valid(hat):
-		hat.queue_free()
+    get_node("HatCooldown").stop()
+    shootable=true
+    if is_instance_valid(hat):
+        hat.queue_free()
 
 func update_animations():
-	animationSprite.flip_h = lastDirection < 0
-	if is_on_ceiling():
-		animationSprite.scale = 0.28* normal_scale
-		animationSprite.position.y = -20
-		animationSprite.flip_h = not animationSprite.flip_h
-		if shootable:
-			animationSprite.play("hang")
-		else:
-			animationSprite.play("wh_hang")
-		return
-		
-	if not is_on_floor():
-		animationSprite.scale = 0.28* normal_scale
-		if shootable:
-			animationSprite.play("jump")
-		else:
-			animationSprite.play("wh_jump")
-		return
-	
-	animationSprite.position = Vector2(0,5)
-	
-	if shootable:
-		animationSprite.scale = normal_scale
-		if direction!=0:
-			animationSprite.play("walk")
-		else:
-			animationSprite.play("idle")
-	else:
-		animationSprite.scale = 0.28* normal_scale
-		if direction!=0:
-			animationSprite.play("wh_walk")
-		else:
-			animationSprite.play("wh_idle")
-	
-	
+    animationSprite.flip_h = lastDirection < 0
+    if is_on_ceiling():
+        animationSprite.scale = 0.28* normal_scale
+        animationSprite.position.y = -20
+        animationSprite.flip_h = not animationSprite.flip_h
+        if shootable:
+            animationSprite.play("hang")
+        else:
+            animationSprite.play("wh_hang")
+        return
+        
+    if not is_on_floor():
+        animationSprite.scale = 0.28* normal_scale
+        if shootable:
+            animationSprite.play("jump")
+        else:
+            animationSprite.play("wh_jump")
+        return
+    
+    animationSprite.position = Vector2(0,5)
+    
+    if shootable:
+        animationSprite.scale = normal_scale
+        if direction!=0:
+            animationSprite.play("walk")
+        else:
+            animationSprite.play("idle")
+    else:
+        animationSprite.scale = 0.28* normal_scale
+        if direction!=0:
+            animationSprite.play("wh_walk")
+        else:
+            animationSprite.play("wh_idle")
+    
+    
 func melee_attack():
-	attackable=false
-	hitbox_shape.disabled = false
-	hitbox_sprite.show()
-	await get_tree().create_timer(0.2).timeout
-	update_animations()
-	hitbox_sprite.hide()
-	hitbox_shape.disabled = true
-	attackable=true
+    attackable=false
+    hitbox_shape.disabled = false
+    hitbox_sprite.show()
+    await get_tree().create_timer(0.2).timeout
+    update_animations()
+    hitbox_sprite.hide()
+    hitbox_shape.disabled = true
+    attackable=true
 
 func _physics_process(delta: float) -> void:
-	direction = Input.get_axis("left", "right")
-	if direction < 0:
-		melee_hitbox.position.x = -80
-		lastDirection = direction
-	if direction > 0:
-		melee_hitbox.position.x = 0
-		lastDirection = direction
-	
-	if Input.is_action_just_pressed("melee") and attackable:
-		melee_attack()
+    direction = Input.get_axis("left", "right")
+    if direction < 0:
+        melee_hitbox.position.x = -80
+        lastDirection = direction
+    if direction > 0:
+        melee_hitbox.position.x = 0
+        lastDirection = direction
+    
+    if Input.is_action_just_pressed("melee") and attackable:
+        melee_attack()
 
-	if direction:
-		self.velocity.x = direction * speed
-	else:
-		self.velocity.x = move_toward(self.velocity.x, 0, speed)
-	#gravidade pq ta no ar
-	if shootable and Input.is_action_pressed("shoot"):
-		throw_hat()
-	
-	if is_on_floor():
-		jumpable=true
-	
-	if not is_on_floor() and not is_on_ceiling():
-		self.velocity += get_gravity() * delta
-	
-	if is_on_ceiling():
-		if Input.is_action_just_pressed("up"):
-			position.y -= BEAM_OFFSET
-		if Input.is_action_just_pressed("down"):
-			self.velocity += get_gravity() * delta
-	elif is_on_floor() and Input.is_action_just_pressed("down"):
-			position.y += BEAM_OFFSET
-	
-	if jumpable and Input.is_action_just_pressed("jump"):
-		disable_collision_temp(1,0.15)
-		self.velocity.y = JUMP_VELOCITY
-		jumpable=false
-	
-	update_animations()
-	move_and_slide()
-	
+    if direction:
+        self.velocity.x = direction * speed
+    else:
+        self.velocity.x = move_toward(self.velocity.x, 0, speed)
+    #gravidade pq ta no ar
+    if shootable and Input.is_action_pressed("shoot"):
+        throw_hat()
+    
+    if is_on_floor():
+        jumpable=true
+    
+    if not is_on_floor() and not is_on_ceiling():
+        self.velocity += get_gravity() * delta
+    
+    if is_on_ceiling():
+        if Input.is_action_just_pressed("up"):
+            position.y -= BEAM_OFFSET
+        if Input.is_action_just_pressed("down"):
+            self.velocity += get_gravity() * delta
+    elif is_on_floor() and Input.is_action_just_pressed("down"):
+            position.y += BEAM_OFFSET
+    
+    if jumpable and Input.is_action_just_pressed("jump"):
+        disable_collision_temp(1,0.15)
+        self.velocity.y = JUMP_VELOCITY
+        jumpable=false
+    
+    update_animations()
+    move_and_slide()
+    
 func _on_hat_cooldown_timeout() -> void:
-	recover_hat()
-
+    recover_hat()
 
 func _on_melee_hitbox_body_entered(body: Node2D) -> void:
-	if body.has_method("take_damage"):
-		body.take_damage(1)
+    print("BATEU")
+    if body.has_method("take_damage"):
+        body.take_damage(1)

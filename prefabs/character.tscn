@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://1o1bhe4383fq" path="res://sprites/character/wh_walk1.png" id="14_awmub"]
 [ext_resource type="Texture2D" uid="uid://c7wvy3a5hxmxa" path="res://sprites/character/wh_walk3.png" id="15_ljx3n"]
 [ext_resource type="Texture2D" uid="uid://bsi2sbgiel7dq" path="res://sprites/character/wh_walk2.png" id="16_cvkvc"]
+[ext_resource type="PackedScene" uid="uid://c1jfm31fcr4gh" path="res://prefabs/components/healthComponent.tscn" id="18_tra6b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xofgc"]
 size = Vector2(85, 128)
@@ -149,6 +150,8 @@ shape = SubResource("RectangleShape2D_6ca2f")
 position = Vector2(49.999992, 2.861023e-06)
 scale = Vector2(0.46875, 0.875)
 texture = ExtResource("8_yqljb")
+
+[node name="HealthComponent" parent="." unique_id=1385140768 instance=ExtResource("18_tra6b")]
 
 [connection signal="timeout" from="HatCooldown" to="." method="_on_hat_cooldown_timeout"]
 [connection signal="body_entered" from="MeleeHitbox" to="." method="_on_melee_hitbox_body_entered"]
