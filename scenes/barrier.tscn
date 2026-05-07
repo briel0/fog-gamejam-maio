@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://5qclj7jxqd87"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exqad"]
+
+[node name="Barrier" type="StaticBody2D" unique_id=174621854]
+scale = Vector2(1, 100)
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2134059131]
+shape = SubResource("RectangleShape2D_exqad")

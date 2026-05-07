@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://3cq0aqh47b5f"]
+
+[ext_resource type="Script" uid="uid://brukr6ff0a6cy" path="res://area_2d.gd" id="1_xlapc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kl8fp"]
+
+[node name="Area2D" type="Area2D" unique_id=1865497198]
+scale = Vector2(100, 1)
+collision_mask = 10
+script = ExtResource("1_xlapc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=84453638]
+shape = SubResource("RectangleShape2D_kl8fp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

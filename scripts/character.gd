@@ -16,7 +16,9 @@ var hat: Node2D = null
 @export var health= 3
 @export var hat_scene: PackedScene
 @export var speed: float = 1000.0
+@export var gameover_scene: PackedScene
 
+@onready var gameover_screen = $"../CanvasLayer/Gameover"
 @onready var animationSprite = $AnimatedSprite2D
 @onready var normal_scale = $AnimatedSprite2D.scale
 @onready var melee_hitbox = $MeleeHitbox
@@ -33,6 +35,12 @@ func disable_collision_temp(mask,temp):
 func take_damage(amount : int):
 	self.health-=amount
 	healthChanged.emit(health)
+	if health<=0:
+		die()
+
+func die():
+	gameover_screen.show()
+	get_tree().paused = true
 
 func throw_hat():
 	shootable=false
@@ -61,11 +69,12 @@ func update_animations():
 		if shootable:
 			animationSprite.play("hang")
 		else:
+			animationSprite.position.y = -15
 			animationSprite.play("wh_hang")
 		return
 		
 	if not is_on_floor():
-		animationSprite.scale = 0.28* normal_scale
+		animationSprite.scale = 0.25* normal_scale
 		if shootable:
 			animationSprite.play("jump")
 		else:
@@ -81,7 +90,7 @@ func update_animations():
 		else:
 			animationSprite.play("idle")
 	else:
-		animationSprite.scale = 0.28* normal_scale
+		animationSprite.scale = 0.25* normal_scale
 		if direction!=0:
 			animationSprite.play("wh_walk")
 		else:
