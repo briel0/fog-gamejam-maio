@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://db6f06y3yq8ly"]
 
-[ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://entities/player/character.tscn" id="1_2056l"]
-[ext_resource type="PackedScene" uid="uid://dl6ouoqk55opw" path="res://projectiles/beam.tscn" id="2_klgss"]
-[ext_resource type="PackedScene" uid="uid://cd3ebt865naao" path="res://projectiles/Bullet.tscn" id="2_tq7rs"]
+[ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://scenes/entities/player/character.tscn" id="1_2056l"]
+[ext_resource type="PackedScene" uid="uid://dl6ouoqk55opw" path="res://scenes/projectiles/beam.tscn" id="2_klgss"]
+[ext_resource type="PackedScene" uid="uid://cd3ebt865naao" path="res://scenes/projectiles/Bullet.tscn" id="2_tq7rs"]
 
 [node name="Level1" type="Node2D" unique_id=500923127]
 

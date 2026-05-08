@@ -13,6 +13,8 @@ var direction: int = 1
 var attackable = true
 var hat: Node2D = null
 
+var is_invincible: bool = false
+
 @export var hat_scene: PackedScene
 @export var speed: float = 1000.0
 
@@ -39,12 +41,26 @@ func disable_collision_temp(mask,temp):
 
 func take_damage(amount: int) -> void:
     health_component.take_damage(amount)
-    piscar_dano()
+    if health_component.current_health > 0:
+        iniciar_iframes()
 
-func piscar_dano() -> void:
-    animationSprite.modulate = Color(1, 0, 0) 
+func iniciar_iframes() -> void:
+    is_invincible = true
+    
+    animationSprite.modulate = Color(1, 0, 0, 1.0) 
     await get_tree().create_timer(0.2).timeout 
-    animationSprite.modulate = Color(1, 1, 1)
+    
+    for i in range(4):
+        animationSprite.modulate = Color(1, 1, 1, 0.3)
+        await get_tree().create_timer(0.15).timeout
+        animationSprite.modulate = Color(1, 1, 1, 1.0)
+        await get_tree().create_timer(0.15).timeout
+        
+    is_invincible = false
+    
+    set_collision_layer_value(2, false)
+    await get_tree().process_frame
+    set_collision_layer_value(2, true)
 
 func throw_hat():
     shootable=false
@@ -156,7 +172,13 @@ func _physics_process(delta: float) -> void:
 func _on_hat_cooldown_timeout() -> void:
     recover_hat()
 
+func apply_hitstop(duration: float = 0.05) -> void:
+    Engine.time_scale = 0.0 
+    await get_tree().create_timer(duration, true, false, true).timeout
+    Engine.time_scale = 1.0
+
 func _on_melee_hitbox_body_entered(body: Node2D) -> void:
     print("BATEU NO INIMIGO")
     if body.has_method("take_damage"):
+        apply_hitstop(0.3)
         body.take_damage(1)

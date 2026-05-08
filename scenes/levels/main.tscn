@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bglqim6dh5pq4"]
 
-[ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://entities/player/character.tscn" id="1_ifaiv"]
-[ext_resource type="PackedScene" uid="uid://mcp04n88y75i" path="res://ui/hud.tscn" id="2_5k4jt"]
-[ext_resource type="PackedScene" uid="uid://bo57o0stlv1rx" path="res://ui/PauseMenu.tscn" id="3_qy63d"]
-[ext_resource type="PackedScene" uid="uid://dl6ouoqk55opw" path="res://projectiles/beam.tscn" id="4_6et1j"]
-[ext_resource type="PackedScene" uid="uid://co7c0jw0h3wxy" path="res://entities/enemies/base-enemy.tscn" id="5_etqu2"]
+[ext_resource type="PackedScene" uid="uid://bp7gyn3h53c4a" path="res://scenes/entities/player/character.tscn" id="1_ifaiv"]
+[ext_resource type="PackedScene" uid="uid://mcp04n88y75i" path="res://scenes/ui/hud.tscn" id="2_5k4jt"]
+[ext_resource type="PackedScene" uid="uid://bo57o0stlv1rx" path="res://scenes/ui/PauseMenu.tscn" id="3_qy63d"]
+[ext_resource type="PackedScene" uid="uid://dl6ouoqk55opw" path="res://scenes/projectiles/beam.tscn" id="4_6et1j"]
+[ext_resource type="PackedScene" uid="uid://co7c0jw0h3wxy" path="res://scenes/entities/enemies/base-enemy.tscn" id="5_etqu2"]
 
 [node name="Main" type="Node2D" unique_id=176912923]
 

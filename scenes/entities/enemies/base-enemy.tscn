@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://co7c0jw0h3wxy"]
 
 [ext_resource type="Texture2D" uid="uid://bwlis81viho2p" path="res://icon.svg" id="1_30y60"]
-[ext_resource type="Script" uid="uid://brrjj5mrhngcq" path="res://entities/enemies/base_enemy.gd" id="1_f042n"]
-[ext_resource type="PackedScene" uid="uid://c1jfm31fcr4gh" path="res://components/healthComponent.tscn" id="2_nin2j"]
-[ext_resource type="Script" uid="uid://dysts0kpwv61d" path="res://states/state_machine.gd" id="3_2bcha"]
-[ext_resource type="Script" uid="uid://diw4f0gd3xtrs" path="res://states/patrol_state.gd" id="4_qromu"]
+[ext_resource type="Script" uid="uid://brrjj5mrhngcq" path="res://scripts/enemies/base_enemy.gd" id="1_f042n"]
+[ext_resource type="PackedScene" uid="uid://c1jfm31fcr4gh" path="res://scenes/components/healthComponent.tscn" id="2_nin2j"]
+[ext_resource type="Script" uid="uid://dysts0kpwv61d" path="res://scripts/states/state_machine.gd" id="3_2bcha"]
+[ext_resource type="Script" uid="uid://diw4f0gd3xtrs" path="res://scripts/states/patrol_state.gd" id="4_qromu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qromu"]
 size = Vector2(130, 126)
