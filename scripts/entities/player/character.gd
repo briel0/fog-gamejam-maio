@@ -22,13 +22,12 @@ var is_invincible: bool = false
 @onready var normal_scale = $AnimatedSprite2D.scale
 @onready var melee_hitbox = $MeleeHitbox
 @onready var hitbox_shape = $MeleeHitbox/CollisionShape2D
-@onready var hitbox_sprite = $MeleeHitbox/Sprite2D #da para tirar dps
+@onready var hitbox_sprite = $MeleeHitbox/Sprite2D
 @onready var health_component = $HealthComponent
 
 func _ready() -> void:
     hitbox_sprite.hide()
     hitbox_shape.set_deferred("disabled", true)
-    
     health_component.died.connect(refresh_game)
 
 func refresh_game() -> void:
@@ -63,11 +62,11 @@ func iniciar_iframes() -> void:
     set_collision_layer_value(2, true)
 
 func throw_hat():
-    shootable=false
-    attackable=false
+    shootable = false
+    attackable = false
     hat = hat_scene.instantiate()
     hat.direction = direction
-    if direction==0:
+    if direction == 0:
         hat.direction = lastDirection
     hat.global_position=global_position + Vector2(hat.direction * 130,-20)
     get_tree().current_scene.add_child(hat)
@@ -178,7 +177,6 @@ func apply_hitstop(duration: float = 0.05) -> void:
     Engine.time_scale = 1.0
 
 func _on_melee_hitbox_body_entered(body: Node2D) -> void:
-    print("BATEU NO INIMIGO")
     if body.has_method("take_damage"):
         apply_hitstop(0.3)
         body.take_damage(1)

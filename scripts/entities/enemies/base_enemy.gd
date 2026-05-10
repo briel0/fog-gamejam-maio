@@ -2,8 +2,17 @@ extends CharacterBody2D
 
 @onready var health_component = $HealthComponent
 
+var target: Node2D = null
+
+func _on_player_detection_zone_body_entered(body: Node2D) -> void:
+    if body.is_in_group("Character"):
+        target = body
+
+func _on_player_detection_zone_body_exited(body: Node2D) -> void:
+    if body.is_in_group("Character"):
+        target = null
+
 func _ready() -> void:
-    print("TOMOU")
     health_component.died.connect(_on_died)
 
 func take_damage(amount: int) -> void:

@@ -3,10 +3,12 @@ class_name PatrolState extends State
 @export var speed: float = 100.0
 var direction: float = 1.0
 
-@onready var ledge_check: RayCast2D = $"../../RayCast2D"
 @onready var sprite: Sprite2D = $"../../Sprite2D"
+@onready var ledge_check: RayCast2D = $"../../RayCast2D"
 
 func enter() -> void:
+    sprite.flip_h = (direction > 0)
+    ledge_check.position.x = abs(ledge_check.position.x) * direction
     enemy.velocity.x = speed * direction
 
 func physics_update(delta: float) -> void:
